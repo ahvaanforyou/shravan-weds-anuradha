@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Shravan Kumar &amp; Hima Bindu | Wedding Celebration</title>
+  <meta name="description" content="Wedding celebration invitation of Shravan Kumar Koramaina and Hima Bindu with the divine blessings of Radha Krishna.">
+
+  <!-- Google Fonts: Luxury Serif, Romantic Script & Classic Lettering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700;800&family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Marcellus&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- GSAP & ScrollTrigger for luxury stacking scroll animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-krishna intro-active">
+
+  <!-- ============================================== -->
+  <!-- 0. IMMERSIVE VIDEO INTRO OPENING EXPERIENCE -->
+  <!-- First frame screenshot with "Tap to Open" box below hands -->
+  <!-- and "Invitation to Shravan & Hima Bindu's Wedding" heading above hands -->
+  <!-- ============================================== -->
+  <div id="introVideoOverlay" class="intro-video-overlay" role="dialog" aria-modal="true" aria-label="Wedding Invitation Intro">
+    <div class="intro-stage">
+      
+      <!-- Video Element -->
+      <video id="introVideo" class="intro-video-element" playsinline webkit-playsinline muted preload="auto">
+        <source src="assets/intro-video.mp4" type="video/mp4">
+      </video>
+
+      <!-- Static First Frame Cover Screen -->
+      <div id="introCoverScreen" class="intro-cover-screen">
+        <img src="assets/intro-first-frame.webp" alt="Radha Krishna Divine Opening" class="intro-first-frame-img" />
+
+        <!-- Top & Bottom Soft Gradient Vignettes for Luxury Text Contrast -->
+        <div class="intro-vignette-top"></div>
+        <div class="intro-vignette-bottom"></div>
+
+        <!-- Heading Above the Hands (Brought Down to Clear Open Sky Area) -->
+        <div class="intro-header-above-hands">
+          <div class="intro-shloka">॥ श्री गणेशाय नमः ॥ श्री राधाकृष्णाभ्यां नमः ॥</div>
+          <div class="intro-invite-subtag">INVITATION TO THE WEDDING OF</div>
+          <h1 class="intro-names-title">Shravan Kumar <span class="intro-amp">&amp;</span> Hima Bindu</h1>
+          <div class="intro-title-divider">
+            <span class="gold-line"></span>
+            <span class="intro-flourish-symbol">❦</span>
+            <span class="gold-line"></span>
+          </div>
+        </div>
+
+        <!-- Tap to Open Box Below the Hands (Bigger, Detailed Card Lowered Below Hands) -->
+        <div class="intro-action-below-hands">
+          <button id="btnTapToOpen" class="intro-tap-card" aria-label="Tap to Open Wedding Invitation">
+            <div class="tap-card-glow"></div>
+            <div class="tap-card-inner-frame">
+              <div class="tap-card-top-tag">
+                <span class="tap-rule-line"></span>
+                <span class="tap-badge-text">SHUBH VIVAH</span>
+                <span class="tap-rule-line"></span>
+              </div>
+              <div class="tap-card-headline">
+                <span class="tap-card-primary">Tap to Open</span>
+              </div>
+              <div class="tap-card-divider"></div>
+              <p class="tap-card-secondary">Touch anywhere to unfold the celebration</p>
+              <div class="tap-card-pulse-indicator">
+                <span class="pulse-dot"></span>
+                <span class="pulse-text">TOUCH TO ENTER</span>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Skip Button in Top Corner -->
+      <button id="btnSkipIntro" class="intro-skip-btn" aria-label="Skip to Invitation">
+        <span>Skip</span>
+        <i data-lucide="arrow-right" class="skip-arrow"></i>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Continuous Falling Flower Petals Canvas Overlay (Flowers & Petals Only, No Hearts) -->
+  <canvas id="flower-petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- Floating Wedding Background Music Controller -->
+  <audio id="weddingBgm" loop preload="auto" src="assets/wedding-music.mp3"></audio>
+  <button id="musicToggleBtn" class="floating-music-btn" aria-label="Toggle Wedding Music">
+    <div class="music-disc-wrap">
+      <i data-lucide="music" class="music-icon icon-playing"></i>
+      <i data-lucide="volume-x" class="music-icon icon-muted"></i>
+    </div>
+    <span class="music-label">Music</span>
+  </button>
+
+  <!-- Main Container -->
+  <main class="invite-container">
+
+    <!-- ============================================== -->
+    <!-- 1. GRAND HERO SECTION -->
+    <!-- Full-height opening screen with single-line date -->
+    <!-- ============================================== -->
+    <header class="section-hero anim-blur">
+      <div class="hero-inner-content">
+        
+        <!-- Couple Names -->
+        <div class="couple-names-wrap">
+          <h1 class="person-name groom-name">Shravan Kumar</h1>
+          <div class="weds-flourish">
+            <span class="flourish-curve left"></span>
+            <span class="weds-text">weds</span>
+            <span class="flourish-curve right"></span>
+          </div>
+          <h1 class="person-name bride-name">Hima Bindu</h1>
+        </div>
+
+        <!-- Ornamental Divider -->
+        <div class="hero-divider">
+          <span class="div-line"></span>
+          <span class="div-symbol">✦</span>
+          <span class="div-line"></span>
+        </div>
+
+        <!-- Single Line Wedding Date -->
+        <div class="hero-date">
+          <span>04 NOVEMBER 2026 · HYDERABAD</span>
+        </div>
+
+      </div>
+
+      <!-- Radha Krishna Sitting on Floral Bench Artwork -->
+      <div class="hero-illustration-wrap">
+        <img 
+          src="assets/hero-radha-krishna.webp" 
+          alt="Radha Krishna Divine Blessings" 
+          class="hero-radha-krishna-img" 
+        />
+      </div>
+    </header>
+
+    <!-- ============================================== -->
+    <!-- 2. BRIDE & GROOM SECTION HEADING -->
+    <!-- ============================================== -->
+    <div class="couple-intro-header anim-blur">
+      <div class="intro-lotus-ornament">
+        <img src="assets/lotus-gold.webp" alt="Sacred Lotus" class="decor-lotus-img" />
+      </div>
+      <div class="intro-badge">✦ THE SACRED UNION ✦</div>
+      <h2 class="intro-title">Bride & Groom</h2>
+      <p class="intro-subtitle">Two souls bound together by divine love and timeless blessings</p>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- 3. GROOM PIC SECTION (Top - Krishna on Left) -->
+    <!-- Baby Krishna on Left, sticking directly to the page border -->
+    <!-- ============================================== -->
+    <section class="section-couple-member section-couple-groom anim-blur">
+      <div class="couple-member-row top-member-layout">
+        
+        <!-- Baby Krishna touching the absolute left border of the phone screen (Zero gap) -->
+        <div class="peeking-icon-wrap krishna-peeking-wrap">
+          <img 
+            src="assets/krishna-peeking.webp" 
+            alt="Little Krishna Peeking" 
+            class="peeking-character-img krishna-img hover-wiggle" 
+          />
+        </div>
+
+        <!-- Groom Photo Card -->
+        <div class="member-photo-card groom-card hover-lift">
+          <div class="card-inner-photo">
+            <img 
+              src="assets/groom-portrait.webp" 
+              alt="Shravan Kumar" 
+              class="actual-portrait-img" 
+            />
+          </div>
+          <div class="member-name-block">
+            <h3 class="member-name">Shravan Kumar</h3>
+            <p class="member-parents">Son of Anuradha &amp; Mohan Koramaina</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 4. BRIDE PIC SECTION (Bottom - Radha on Right) -->
+    <!-- Bride Pic, Baby Radha on Right sticking directly to the page border -->
+    <!-- ============================================== -->
+    <section class="section-couple-member section-couple-bride anim-blur">
+      <div class="couple-member-row bottom-member-layout">
+        
+        <!-- Bride Photo Card -->
+        <div class="member-photo-card bride-card hover-lift">
+          <div class="card-inner-photo">
+            <img 
+              src="assets/bride-portrait.webp" 
+              alt="Hima Bindu" 
+              class="actual-portrait-img" 
+            />
+          </div>
+          <div class="member-name-block">
+            <h3 class="member-name">Hima Bindu</h3>
+            <p class="member-parents">Daughter of Kalavathi &amp; Sesha Chary</p>
+          </div>
+        </div>
+
+        <!-- Baby Radha touching the absolute right border of the phone screen (Zero gap) -->
+        <div class="peeking-icon-wrap radha-peeking-wrap">
+          <img 
+            src="assets/radha-peeking.webp" 
+            alt="Little Radha Peeking" 
+            class="peeking-character-img radha-img hover-wiggle" 
+          />
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 5. SCRATCH TO REVEAL THE WEDDING COUNTDOWN TIMER -->
+    <!-- ============================================== -->
+    <section class="section-scratch anim-blur">
+      
+      <!-- Sacred Makhan Matka Decoration with Peacock Feather -->
+      <div class="scratch-matka-decor">
+        <img src="assets/makhan-matka.webp" alt="Sacred Makhan Matka" class="decor-matka-img hover-wiggle" />
+      </div>
+
+      <div class="scratch-card-box" id="scratch-container">
+        
+        <!-- Revealed Live Countdown Underneath -->
+        <div class="scratch-under-content">
+          <div class="scratch-inner-border">
+            <div class="scratch-pill-tag">✦ AUSPICIOUS MUHURTHAM COUNTDOWN ✦</div>
+            <div class="scratch-wedding-date">04 NOVEMBER 2026 • HYDERABAD</div>
+            
+            <!-- Live Ticking Countdown Units -->
+            <div class="countdown-units-row" id="wedding-countdown">
+              <div class="cd-unit">
+                <span class="cd-num" id="cd-days">00</span>
+                <span class="cd-lbl">Days</span>
+              </div>
+              <span class="cd-colon">:</span>
+              <div class="cd-unit">
+                <span class="cd-num" id="cd-hours">00</span>
+                <span class="cd-lbl">Hours</span>
+              </div>
+              <span class="cd-colon">:</span>
+              <div class="cd-unit">
+                <span class="cd-num" id="cd-minutes">00</span>
+                <span class="cd-lbl">Mins</span>
+              </div>
+              <span class="cd-colon">:</span>
+              <div class="cd-unit">
+                <span class="cd-num" id="cd-seconds">00</span>
+                <span class="cd-lbl">Secs</span>
+              </div>
+            </div>
+
+            <p class="scratch-timer-quote">"Counting down every sacred second until our eternal union."</p>
+          </div>
+        </div>
+
+        <!-- Canvas Royal Blue Scratch Layer -->
+        <canvas id="scratch-canvas" class="scratch-canvas-layer"></canvas>
+
+        <!-- Scratch Script Text Overlay -->
+        <div class="scratch-label-overlay" id="scratch-hint">
+          <span class="scratch-calligraphy">Scratch to Reveal</span>
+          <span class="scratch-tap-guide">✦ Rub with finger or cursor to unveil ✦</span>
+        </div>
+      </div>
+
+      <div class="scratch-action-row">
+        <button id="btn-quick-reveal" class="btn-scratch-reveal" aria-label="Quick Reveal Countdown">
+          <i data-lucide="sparkles"></i>
+          <span>Quick Reveal</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 6. PHOTO GALLERY SECTION -->
+    <!-- Simple big horizontal images with arrow buttons & swipe -->
+    <!-- ============================================== -->
+    <section class="section-gallery anim-blur" id="gallery">
+      <div class="section-title-wrap">
+        <span class="section-badge">✦ SACRED MOMENTS ✦</span>
+        <h2 class="section-title">Cherished Moments</h2>
+        <p class="section-subtitle">A glimpse into our journey of love, friendship, and divine togetherness</p>
+      </div>
+
+      <div class="big-carousel-wrapper">
+        <!-- Navigation Arrow Prev -->
+        <button class="carousel-nav-btn prev-btn" id="galleryPrev" aria-label="Previous Photo">
+          <i data-lucide="chevron-left"></i>
+        </button>
+
+        <!-- Carousel Track Viewport -->
+        <div class="big-carousel-viewport" id="galleryViewport">
+          <div class="big-carousel-slides" id="gallerySlides">
+            <div class="big-slide-item active">
+              <div class="big-photo-frame">
+                <img src="assets/gallery-couple-1.webp" alt="Royal Wedding Couple" />
+              </div>
+            </div>
+            <div class="big-slide-item">
+              <div class="big-photo-frame">
+                <img src="assets/gallery-couple-2.webp" alt="Cherished Candid Moments" />
+              </div>
+            </div>
+            <div class="big-slide-item">
+              <div class="big-photo-frame">
+                <img src="assets/gallery-couple-3.webp" alt="Timeless Love and Warm Embrace" />
+              </div>
+            </div>
+            <div class="big-slide-item">
+              <div class="big-photo-frame">
+                <img src="assets/gallery-couple-4.webp" alt="Traditional Ceremonial Festivities" />
+              </div>
+            </div>
+            <div class="big-slide-item">
+              <div class="big-photo-frame">
+                <img src="assets/gallery-couple-5.webp" alt="Cherished Moments with Family" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Arrow Next -->
+        <button class="carousel-nav-btn next-btn" id="galleryNext" aria-label="Next Photo">
+          <i data-lucide="chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Carousel Dots Navigation -->
+      <div class="carousel-dots-indicators" id="galleryDots"></div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 7. ORDER OF EVENTS SECTION (SINGLE EXPANDABLE CARD) -->
+    <!-- Single grand wedding card with interactive expandable details drawer -->
+    <!-- ============================================== -->
+    <section class="section-events anim-blur" id="events">
+      <div class="section-title-wrap">
+        <span class="section-badge">✦ CELEBRATIONS ✦</span>
+        <h2 class="events-main-title">Order of Events</h2>
+        <p class="section-subtitle">We cordially invite you to be part of our sacred wedding ceremony</p>
+      </div>
+
+      <div class="events-single-container" id="eventsStack">
+        
+        <!-- Single Grand Wedding Card -->
+        <div class="event-single-card" id="event-single-card">
+          
+          <!-- Banner Artwork with Royal Parchment Overlay -->
+          <div class="event-banner-wrap">
+            <img 
+              src="assets/banner-wedding.webp" 
+              alt="Wedding Ceremony" 
+              class="event-banner-artwork" 
+            />
+            <div class="event-card-inner-overlay overlay-right">
+              <h3 class="event-custom-title title-wedding">Wedding</h3>
+              <p class="event-custom-date date-wedding">04-11-2026</p>
+            </div>
+          </div>
+
+          <!-- Bottom Action & Quick Summary Bar -->
+          <div class="event-summary-action-bar">
+            <div class="event-meta-summary-pills">
+              <span class="event-meta-pill">
+                <i data-lucide="clock" class="pill-icon"></i> 07:30 PM Onwards
+              </span>
+              <span class="event-meta-pill">
+                <i data-lucide="map-pin" class="pill-icon"></i> Karmanghat, Hyderabad
+              </span>
+            </div>
+
+            <!-- Interactive Expand / Collapse Trigger Button -->
+            <button 
+              id="btnToggleEventDetails" 
+              class="btn-event-expand" 
+              aria-expanded="false" 
+              aria-controls="eventDetailsDrawer"
+            >
+              <span class="expand-btn-text">View Event Details &amp; Directions</span>
+              <i data-lucide="chevron-down" class="expand-chevron-icon"></i>
+            </button>
+          </div>
+
+          <!-- Expandable Details Drawer -->
+          <div id="eventDetailsDrawer" class="event-details-drawer">
+            <div class="drawer-inner-padding">
+              
+              <!-- Auspicious Muhurtham Banner -->
+              <div class="drawer-muhurtham-card">
+                <span class="drawer-lotus-icon">🪷</span>
+                <span class="drawer-badge-gold">✦ SACRED SUMUHURTHAM ✦</span>
+                <h4 class="drawer-muhurtham-time">Wednesday, 04th November 2026</h4>
+                <p class="drawer-muhurtham-highlight">Lagna Muhurtham at 07:30 PM</p>
+                <p class="drawer-muhurtham-note">In the divine presence of family, relatives, and well-wishers</p>
+              </div>
+
+              <!-- Detailed Event Program Timeline -->
+              <div class="drawer-program-timeline">
+                <h5 class="drawer-section-heading">
+                  <i data-lucide="sparkles" class="sec-hd-icon"></i> Ceremony Itinerary
+                </h5>
+                <div class="program-steps-list">
+                  <div class="program-step">
+                    <div class="step-time-badge">06:30 PM</div>
+                    <div class="step-detail-box">
+                      <span class="step-title">Baraat &amp; Swagatham</span>
+                      <span class="step-desc">Grand arrival of the groom and joyful welcoming by bride's family</span>
+                    </div>
+                  </div>
+                  <div class="program-step step-highlighted">
+                    <div class="step-time-badge">07:30 PM</div>
+                    <div class="step-detail-box">
+                      <span class="step-title">Lagna Muhurtham &amp; Jeelakarra Bellam</span>
+                      <span class="step-desc">The sacred auspicious moment of divine union and timeless vows</span>
+                    </div>
+                  </div>
+                  <div class="program-step">
+                    <div class="step-time-badge">08:30 PM</div>
+                    <div class="step-detail-box">
+                      <span class="step-title">Mangalya Dharana &amp; Talambralu</span>
+                      <span class="step-desc">The sacred knot of love followed by showering of auspicious pearls</span>
+                    </div>
+                  </div>
+                  <div class="program-step">
+                    <div class="step-time-badge">09:00 PM</div>
+                    <div class="step-detail-box">
+                      <span class="step-title">Aseervachanam &amp; Grand Feast</span>
+                      <span class="step-desc">Blessings from elders and a traditional lavish celebratory dinner</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Venue Details & Direct Navigation Links Inside Card -->
+              <div class="drawer-venue-card">
+                <h5 class="drawer-section-heading">
+                  <i data-lucide="map-pin" class="sec-hd-icon"></i> Venue &amp; Directions
+                </h5>
+                <div class="venue-brief">
+                  <h6 class="venue-place-name">Singi Reddy Shiva Reddy Gardens</h6>
+                  <p class="venue-place-address">Padma Nagar Colony, Karmanghat, Telangana (Beside Karmanghat Hanuman Temple) - 500097</p>
+                </div>
+                <div class="drawer-action-btn-row">
+                  <a 
+                    href="https://www.google.com/maps/search/?api=1&query=Singi+Reddy+Shiva+Reddy+Gardens+Karmanghat+Telangana" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn-drawer-nav"
+                  >
+                    <i data-lucide="navigation"></i>
+                    <span>Open in Maps</span>
+                  </a>
+                  <button 
+                    type="button" 
+                    class="btn-drawer-calendar" 
+                    onclick="addToGoogleCalendar()"
+                  >
+                    <i data-lucide="calendar-plus"></i>
+                    <span>Add to Calendar</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 8. VENUE & LOCATION MAP SECTION (BEFORE RSVP) -->
+    <!-- ============================================== -->
+    <section class="section-venue-map anim-blur" id="venue">
+      <div class="section-title-wrap">
+        <!-- Royal Blue & White Floral Crest Decoration -->
+        <div class="venue-floral-crest-wrap">
+          <img src="assets/blue-floral-crest.webp" alt="Royal Blue Floral Crest" class="decor-floral-crest-img" />
+        </div>
+        <span class="section-badge">✦ THE SACRED DESTINATION ✦</span>
+        <h2 class="section-title">Venue &amp; Location</h2>
+        <div class="section-divider-flourish">
+          <span class="div-line"></span>
+          <span class="div-symbol">❦</span>
+          <span class="div-line"></span>
+        </div>
+        <p class="section-subtitle">We look forward to welcoming you at our auspicious celebration venue</p>
+      </div>
+
+      <div class="venue-card-wrapper">
+        <div class="venue-info-box">
+          <div class="venue-icon-circle">
+            <i data-lucide="map-pin" class="venue-pin-icon"></i>
+          </div>
+          <h3 class="venue-name">Singi Reddy Shiva Reddy Gardens</h3>
+          <p class="venue-subname">Padma Nagar Colony, Karmanghat, Telangana (Beside Karmanghat Hanuman Temple) - 500097</p>
+          <div class="venue-meta-row">
+            <span><i data-lucide="calendar"></i> Wednesday, 04 Nov 2026</span>
+            <span><i data-lucide="clock"></i> Lagna Muhurtham: 07:30 PM Onwards</span>
+          </div>
+        </div>
+
+        <!-- Google Maps Embed Frame -->
+        <div class="venue-map-frame">
+          <iframe
+            title="Google Maps Location for Wedding Venue"
+            src="https://maps.google.com/maps?q=Singi+Reddy+Shiva+Reddy+Gardens+Karmanghat+Telangana&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="220"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+
+        <div class="venue-actions">
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Singi+Reddy+Shiva+Reddy+Gardens+Karmanghat+Telangana"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="venue-directions-btn"
+          >
+            <i data-lucide="navigation"></i>
+            <span>Open in Google Maps</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 9. RSVP SECTION (DEFAULT OPEN) -->
+    <!-- When clicking 'Regretfully Decline', guest count collapses -->
+    <!-- ============================================== -->
+    <section class="section-rsvp anim-blur" id="rsvp-section">
+      <!-- Royal Blue RSVP Header -->
+      <div class="rsvp-royal-bar" id="rsvp-toggle-bar">
+        <div class="rsvp-bar-content">
+          <h2 class="rsvp-bar-title">RSVP</h2>
+          <span class="rsvp-bar-hint">Kindly Confirm Your Gracious Presence</span>
+        </div>
+      </div>
+
+      <!-- Responsive RSVP Form Container (DEFAULT OPEN) -->
+      <div class="rsvp-form-container" id="rsvp-form-wrapper">
+        <form id="rsvp-form" class="rsvp-form" onsubmit="handleRsvpSubmit(event)">
+          <div class="form-field">
+            <label for="rsvp-name">Guest / Family Name <span class="req">*</span></label>
+            <input type="text" id="rsvp-name" required placeholder="e.g. Ramesh Kumar &amp; Family" />
+          </div>
+
+          <div class="form-field">
+            <label for="rsvp-phone">Phone / WhatsApp Number <span class="req">*</span></label>
+            <input type="tel" id="rsvp-phone" required placeholder="e.g. +91 98765 43210" />
+          </div>
+
+          <div class="form-field">
+            <label>Attendance Status <span class="req">*</span></label>
+            <div class="attendance-radios">
+              <label class="radio-card active" id="radio-accept-label">
+                <input type="radio" name="attending" value="yes" checked />
+                <span>🌸 Joyfully Accept</span>
+              </label>
+              <label class="radio-card" id="radio-decline-label">
+                <input type="radio" name="attending" value="no" />
+                <span>🕊️ Regretfully Decline</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Attendance Details Section (Hidden automatically when 'Regretfully Decline' is clicked) -->
+          <div id="rsvp-attendance-details">
+            <div class="form-row-dual">
+              <div class="form-field">
+                <label for="rsvp-guests">Number of Guests</label>
+                <select id="rsvp-guests">
+                  <option value="1">1 Person</option>
+                  <option value="2" selected>2 Persons</option>
+                  <option value="3">3 Persons</option>
+                  <option value="4">4 Persons</option>
+                  <option value="5+">5+ Family</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label>Events Attending</label>
+                <div class="event-checkboxes">
+                  <label><input type="checkbox" name="events" value="Wedding Ceremony" checked /> Wedding Ceremony (07:30 PM)</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="rsvp-message">Warm Wishes for the Couple</label>
+            <textarea id="rsvp-message" rows="2" placeholder="Send your heartfelt blessings to Shravan &amp; Hima Bindu..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit-rsvp">
+            <span>Confirm RSVP</span>
+            <i data-lucide="send"></i>
+          </button>
+        </form>
+
+        <!-- RSVP Confirmation Card -->
+        <div id="rsvp-success-box" class="rsvp-success-card hidden">
+          <div class="success-icon-circle">
+            <i data-lucide="check" class="check-svg"></i>
+          </div>
+          <h3 class="success-name">Thank You, <span id="guest-name-display">Guest</span>!</h3>
+          <p class="success-note">
+            Your RSVP has been recorded with joy. We eagerly await celebrating this sacred union with you!
+          </p>
+          <div class="success-pill" id="rsvp-summary-details"></div>
+          <button type="button" class="btn-edit-rsvp" onclick="resetRsvpForm()">
+            <i data-lucide="edit-3"></i> Edit Response
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 10. HANGING SWING & KINDLY JOIN US SECTION -->
+    <!-- Connected directly to the bottom of the RSVP section -->
+    <!-- ============================================== -->
+    <section class="section-hanging-swing anim-blur">
+      
+      <!-- Swing Artwork hanging directly from the RSVP bar above -->
+      <div class="swing-hanging-anchor">
+        <div class="swing-pendulum hover-swing">
+          <img 
+            src="assets/radha-krishna-swing.webp" 
+            alt="Radha Krishna on Sacred Swing (Jhula)" 
+            class="swing-image" 
+          />
+        </div>
+      </div>
+
+      <!-- Kindly Join Us Invitation Text -->
+      <div class="kindly-join-content">
+        <h2 class="kindly-title">Kindly Join Us</h2>
+
+        <div class="invitation-lines">
+          <p class="line-lead">With hearts full of joy, we invite you to</p>
+          <p class="line-lead">celebrate our special day.</p>
+          <p class="line-sub">Your presence and blessings will make our</p>
+          <p class="line-sub">celebration truly memorable.</p>
+        </div>
+
+        <div class="hosts-block">
+          <div class="host-name">Anuradha &amp; Mohan Koramaina</div>
+          <div class="host-with">with</div>
+          <div class="host-name">Kalavathi &amp; Sesha Chary</div>
+        </div>
+        <p class="hosts-sub-family">Along with Shravan Kumar &amp; Hima Bindu</p>
+
+        <!-- Auspicious Lotus Divider Emblem -->
+        <div class="hosts-lotus-decor">
+          <img src="assets/lotus-gold.webp" alt="Sacred Lotus Flourish" class="decor-hosts-lotus-img" />
+        </div>
+
+        <div class="celebrating-tagline">
+          <p class="tagline-text">WE LOOK FORWARD TO<br>CELEBRATING WITH YOU</p>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="quick-share-row">
+        <button class="btn-share-pill" onclick="shareOnWhatsApp()">
+          <i data-lucide="share-2"></i> WhatsApp Invite
+        </button>
+        <button class="btn-share-pill" onclick="copyInviteLink()">
+          <i data-lucide="copy"></i> Copy Link
+        </button>
+      </div>
+
+      <!-- Bottom Hashtag -->
+      <footer class="invite-footer">
+        <span class="wedding-tag">#ShravanWedsHimaBindu</span>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
