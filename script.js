@@ -727,6 +727,37 @@ function initRsvpExpander() {
   }
 }
 
+/**
+ * GOOGLE SHEETS RSVP WEBHOOK CONFIGURATION
+ * Set up your Google Sheet in 1 minute using the included GOOGLE_SHEET_SETUP.md guide.
+ * Paste your deployed Web App URL below (e.g. https://script.google.com/macros/s/.../exec)
+ */
+const GOOGLE_SHEET_WEBHOOK_URL = '';
+
+/**
+ * Sends RSVP payload to Google Sheets Webhook in background
+ */
+async function sendRsvpToGoogleSheet(payload) {
+  if (!GOOGLE_SHEET_WEBHOOK_URL) {
+    console.info('Google Sheet Webhook URL is not configured yet. See GOOGLE_SHEET_SETUP.md to connect your sheet.');
+    return;
+  }
+
+  try {
+    await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    console.log('✓ RSVP successfully synced to Google Sheets!');
+  } catch (err) {
+    console.warn('Google Sheets RSVP sync notice:', err);
+  }
+}
+
 function handleRsvpSubmit(e) {
   e.preventDefault();
 
@@ -742,17 +773,41 @@ function handleRsvpSubmit(e) {
     .map(cb => cb.value)
     .join(', ');
 
+  // Detect if updating an existing submission (Smart In-Place Editing)
+  const prevSaved = localStorage.getItem('shravan_rsvp_submission') || localStorage.getItem('krishna_rsvp_submission');
+  let isUpdate = false;
+  let originalPhone = phone;
+  let originalName = name;
+  if (prevSaved) {
+    try {
+      const prevData = JSON.parse(prevSaved);
+      isUpdate = true;
+      originalPhone = prevData.phone || phone;
+      originalName = prevData.name || name;
+    } catch (_) {}
+  }
+
   const rsvpData = {
-    name,
-    phone,
-    attending,
+    action: isUpdate ? 'update' : 'create',
+    isUpdate: isUpdate,
+    originalPhone: originalPhone,
+    originalName: originalName,
+    name: name,
+    phone: phone,
+    contact: phone,
+    attending: attending === 'yes' ? 'Attending' : 'Declined',
     guests: attending === 'yes' ? guests : '0',
-    events: attending === 'yes' ? eventsChecked : 'None',
-    message,
+    guest_count: attending === 'yes' ? (parseInt(guests, 10) || 1) : 0,
+    events: attending === 'yes' ? (eventsChecked || 'Wedding Reception') : 'None',
+    message: message || '-',
     timestamp: new Date().toISOString()
   };
 
-  localStorage.setItem('krishna_rsvp_submission', JSON.stringify(rsvpData));
+  // Cache locally
+  localStorage.setItem('shravan_rsvp_submission', JSON.stringify(rsvpData));
+
+  // Sync to Google Sheets Webhook in background
+  sendRsvpToGoogleSheet(rsvpData);
 
   // Switch to confirmation card
   const form = document.getElementById('rsvp-form');
@@ -763,7 +818,7 @@ function handleRsvpSubmit(e) {
   if (nameDisplay) nameDisplay.textContent = name;
   if (summaryDetails) {
     summaryDetails.innerHTML = attending === 'yes'
-      ? `🎉 Attending with <strong>${guests}</strong> guest(s) for <strong>${eventsChecked || 'All Celebrations'}</strong>`
+      ? `🎉 Attending with <strong>${guests}</strong> guest(s) for <strong>${eventsChecked || 'Wedding Reception'}</strong>`
       : `🕊️ Heartfelt blessings received with warm gratitude from afar`;
   }
 
@@ -782,7 +837,7 @@ function resetRsvpForm() {
 }
 
 function checkExistingRsvp() {
-  const saved = localStorage.getItem('krishna_rsvp_submission');
+  const saved = localStorage.getItem('shravan_rsvp_submission') || localStorage.getItem('krishna_rsvp_submission');
   if (saved) {
     try {
       const data = JSON.parse(saved);
