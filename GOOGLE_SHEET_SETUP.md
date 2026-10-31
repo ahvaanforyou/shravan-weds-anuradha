@@ -70,8 +70,8 @@ This guide explains how to set up your Google Sheet with the **Royal Executive D
 ---
 
 ### Step 5: Connect Webhook URL in `script.js`
-Open `script.js` and paste your URL into the `GOOGLE_SHEET_WEBHOOK_URL` constant near line 25:
+Your Google Sheets Webhook URL is now connected in `script.js`:
 ```js
-const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/YOUR_ACTUAL_DEPLOYMENT_ID/exec';
+const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz0sEemDhwFNvyDz_cajxdWdbQPt5w_3GSe48h1FPoqlCG2Aa8OP8JbiZyReO_w3G1m4Q/exec';
 ```
-Then commit and push! Your website is now permanently connected to your Google Sheet.
+All RSVP submissions from the website are now recorded and updated directly in your Google Sheet!

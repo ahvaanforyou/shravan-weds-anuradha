@@ -732,7 +732,7 @@ function initRsvpExpander() {
  * Set up your Google Sheet in 1 minute using the included GOOGLE_SHEET_SETUP.md guide.
  * Paste your deployed Web App URL below (e.g. https://script.google.com/macros/s/.../exec)
  */
-const GOOGLE_SHEET_WEBHOOK_URL = '';
+const GOOGLE_SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz0sEemDhwFNvyDz_cajxdWdbQPt5w_3GSe48h1FPoqlCG2Aa8OP8JbiZyReO_w3G1m4Q/exec';
 
 /**
  * Sends RSVP payload to Google Sheets Webhook in background
