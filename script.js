@@ -202,7 +202,7 @@ function initScrollAnimations() {
    3. LIVE WEDDING COUNTDOWN TIMER (01 NOVEMBER 2026)
    ========================================================================== */
 function initWeddingCountdown() {
-  const targetDate = new Date('2026-11-04T19:30:00+05:30').getTime();
+  const targetDate = new Date('2026-11-04T19:00:00+05:30').getTime();
 
   const elDays = document.getElementById('cd-days');
   const elHours = document.getElementById('cd-hours');
@@ -681,9 +681,9 @@ function initEventDetailsModal() {
 function addToGoogleCalendar() {
   const title = encodeURIComponent("Wedding Reception: Shravan Kumar & Hima Bindu");
   const details = encodeURIComponent("Wedding Reception of Shravan Kumar & Hima Bindu with the divine blessings of Radha Krishna.");
-  const location = encodeURIComponent("Singi Reddy Shiva Reddy Gardens, Padma Nagar Colony, Karmanghat, Telangana - 500097");
-  // 04 Nov 2026 19:30 IST to 23:30 IST -> 14:00 UTC to 18:00 UTC
-  const dates = "20261104T140000Z/20261104T180000Z";
+  const location = encodeURIComponent("Yalala Balreddy Function Hall, Yelmati Nagar, Balapur, Hyderabad, Telangana - 500005");
+  // 04 Nov 2026 19:00 IST to 23:00 IST -> 13:30 UTC to 17:30 UTC
+  const dates = "20261104T133000Z/20261104T173000Z";
   const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
   window.open(gCalUrl, '_blank');
 }
@@ -806,8 +806,8 @@ function shareOnWhatsApp() {
   const groomParents = 'Anuradha & Mohan Koramaina';
   const brideParents = 'Kalavathi & Sesha Chary';
   const date = 'Wednesday, 04 November 2026';
-  const reception = '07:30 PM Onwards';
-  const venue = 'Singi Reddy Shiva Reddy Gardens, Padma Nagar Colony, Karmanghat, Telangana (Beside Karmanghat Hanuman Temple) - 500097';
+  const reception = '07:00 PM Onwards';
+  const venue = 'Yalala Balreddy Function Hall, Yelmati Nagar, Balapur, Hyderabad, Telangana - 500005';
   const link = 'https://shravan-weds-anuradha.vercel.app';
 
   const msg = `॥ श्री राधाकृष्णाभ्यां नमः ॥\n\n` +

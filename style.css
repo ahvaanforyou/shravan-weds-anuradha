@@ -979,18 +979,22 @@ button {
   flex-direction: column;
   overflow: visible;
   padding-bottom: 10px;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
 }
 
 /* Single Grand Wedding Card Container */
 .event-single-card {
   position: relative;
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: 22px;
   overflow: hidden;
-  box-shadow: 0 14px 34px rgba(19, 57, 121, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1.5px solid rgba(19, 57, 121, 0.12);
+  box-shadow: 0 16px 38px rgba(19, 57, 121, 0.14), 0 3px 10px rgba(0, 0, 0, 0.05);
+  border: 1.5px solid rgba(19, 57, 121, 0.14);
   cursor: pointer;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  width: 100%;
 }
 
 .event-single-card:hover {
@@ -1034,8 +1038,17 @@ button {
 }
 
 .overlay-right {
-  right: 5%;
-  width: 52%;
+  right: 7%;
+  width: 36%;
+  top: 10%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 4px;
+  box-sizing: border-box;
 }
 
 .overlay-left {
@@ -1075,14 +1088,16 @@ button {
   color: #d4af37;
 }
 
-/* Event Titles & Dates */
+/* Event Titles & Dates - Smaller size so Reception fits perfectly inside ornate frame */
 .event-custom-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2.1rem;
-  font-weight: 500;
-  line-height: 1.1;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.15;
   margin: 0;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  max-width: 95%;
 }
 
 .title-wedding {
@@ -1091,10 +1106,11 @@ button {
 
 .event-custom-date {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.15rem;
+  font-size: 0.82rem;
   font-weight: 500;
   margin-top: 3px;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
 }
 
 .date-wedding {
@@ -1506,10 +1522,28 @@ body.modal-open {
 
 @media (min-width: 420px) {
   .event-custom-title {
-    font-size: 2.5rem;
+    font-size: 1.45rem;
   }
   .event-custom-date {
-    font-size: 1.3rem;
+    font-size: 0.92rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .event-custom-title {
+    font-size: 1.65rem;
+  }
+  .event-custom-date {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .event-custom-title {
+    font-size: 1.1rem;
+  }
+  .event-custom-date {
+    font-size: 0.72rem;
   }
 }
 
