@@ -103,7 +103,7 @@ def generate_banners():
     draw.line([(center_x - 130, 290), (center_x + 130, 290)], fill=deep_gold, width=1)
 
     draw_c('Wednesday, 04 November 2026', 308, f_date, bright_gold)
-    draw_c('Lagna Muhurtham at 07:30 PM Onwards', 346, f_time, (245, 240, 225))
+    draw_c('Reception: 07:30 PM Onwards', 346, f_time, (245, 240, 225))
     draw_c('Singi Reddy Shiva Reddy Gardens', 380, f_venue_bold, (230, 210, 150))
     draw_c('Padma Nagar, Karmanghat, Hyderabad', 408, f_venue, (220, 205, 170))
 
