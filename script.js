@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. Simple Big Images Horizontal Photo Gallery with Arrow Navigation
   initSimpleGalleryCarousel();
 
-  // 6. GSAP ScrollTrigger Event Cards Stacking Deck & Single Event Expand
+  // 6. GSAP ScrollTrigger & Event Details Popup Modal with Confetti
   initEventCardsScrollTrigger();
-  initSingleEventExpand();
+  initEventDetailsModal();
 
   // 7. Responsive RSVP System with Attendance Toggle
   initRsvpAttendanceToggle();
@@ -582,22 +582,98 @@ function initEventCardsScrollTrigger() {
 }
 
 /* ==========================================================================
-   6. SINGLE EXPANDABLE EVENT CARD INTERACTION
-   Smooth toggle for ceremony itinerary and venue details
+   6. EVENT DETAILS POPUP MODAL DIALOG WITH CELEBRATORY CONFETTI
+   Opens on click of card or button, fires vibrant confetti burst
    ========================================================================== */
-function initSingleEventExpand() {
-  const btn = document.getElementById('btnToggleEventDetails');
-  const drawer = document.getElementById('eventDetailsDrawer');
-  if (!btn || !drawer) return;
+function triggerCelebratoryConfetti() {
+  if (typeof confetti !== 'function') return;
 
-  btn.addEventListener('click', () => {
-    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!isExpanded));
-    drawer.classList.toggle('is-open');
+  // Festive Indian Wedding Colors: Auspicious Gold, Marigold Orange, Crimson, Deep Blue, White
+  const colors = ['#d4af37', '#f59e0b', '#c2410c', '#133979', '#ffffff', '#e11d48'];
 
-    const label = btn.querySelector('.expand-btn-text');
-    if (label) {
-      label.textContent = !isExpanded ? 'Hide Event Details' : 'View Event Details & Directions';
+  // Center burst
+  confetti({
+    particleCount: 80,
+    spread: 75,
+    origin: { y: 0.6 },
+    colors: colors,
+    zIndex: 999999
+  });
+
+  // Staggered side cannon bursts
+  setTimeout(() => {
+    confetti({
+      particleCount: 45,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0.1, y: 0.65 },
+      colors: colors,
+      zIndex: 999999
+    });
+    confetti({
+      particleCount: 45,
+      angle: 120,
+      spread: 55,
+      origin: { x: 0.9, y: 0.65 },
+      colors: colors,
+      zIndex: 999999
+    });
+  }, 220);
+}
+
+function initEventDetailsModal() {
+  const card = document.getElementById('weddingEventCard');
+  const triggerBtn = document.getElementById('btnOpenEventModal');
+  const modal = document.getElementById('eventDetailsModal');
+  const closeBtn = document.getElementById('btnCloseEventModal');
+  const backdrop = document.getElementById('modalBackdrop');
+
+  if (!modal) return;
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    modal.classList.add('is-active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    triggerCelebratoryConfetti();
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  }
+
+  if (card) {
+    card.addEventListener('click', (e) => {
+      // Avoid double trigger if clicking button inside card
+      if (e.target.closest('#btnOpenEventModal')) return;
+      openModal(e);
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(e);
+      }
+    });
+  }
+
+  if (triggerBtn) {
+    triggerBtn.addEventListener('click', openModal);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', closeModal);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+      closeModal();
     }
   });
 }
@@ -727,10 +803,28 @@ function checkExistingRsvp() {
 function shareOnWhatsApp() {
   const groom = 'Shravan Kumar';
   const bride = 'Hima Bindu';
-  const date = 'Wednesday, 04 November 2026 (07:30 PM)';
-  const venue = 'Singi Reddy Shiva Reddy Gardens, Karmanghat';
-  
-  const msg = `🌸 *Wedding Invitation* 🌸\n\nWith the divine blessings of Sri Radha Krishna, Anuradha & Mohan Koramaina and Kalavathi & Sesha Chary joyfully invite you to the wedding celebration of:\n\n*${groom} weds ${bride}*\n\n📅 Date: ${date}\n📍 Venue: ${venue}\n\nKindly view our digital wedding invitation and RSVP here:\n${window.location.href}\n\nWe look forward to celebrating together! ✨`;
+  const groomParents = 'Anuradha & Mohan Koramaina';
+  const brideParents = 'Kalavathi & Sesha Chary';
+  const date = 'Wednesday, 04 November 2026';
+  const muhurtham = '07:30 PM Onwards (Lagna Muhurtham)';
+  const venue = 'Singi Reddy Shiva Reddy Gardens, Padma Nagar Colony, Karmanghat, Telangana (Beside Karmanghat Hanuman Temple) - 500097';
+  const link = 'https://shravan-weds-anuradha.vercel.app';
+
+  const msg = `॥ श्री राधाकृष्णाभ्यां नमः ॥\n\n` +
+    `🌸 *WEDDING CELEBRATION INVITATION* 🌸\n\n` +
+    `Together with their families,\n` +
+    `*${groomParents}*\n` +
+    `& *${brideParents}*\n\n` +
+    `Cordially invite your gracious presence and blessings on the auspicious wedding celebration of their beloved children:\n\n` +
+    `✨ *${groom}* ✨\n` +
+    `_weds_\n` +
+    `✨ *${bride}* ✨\n\n` +
+    `📅 *Date:* ${date}\n` +
+    `⏰ *Muhurtham:* ${muhurtham}\n` +
+    `📍 *Venue:* ${venue}\n\n` +
+    `💍 *Tap to open digital invitation & RSVP:* \n` +
+    `${link}\n\n` +
+    `_We look forward to celebrating together with you!_ 🌸🪷`;
 
   const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
   window.open(waUrl, '_blank');

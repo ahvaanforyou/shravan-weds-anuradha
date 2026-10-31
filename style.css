@@ -954,8 +954,8 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   7. ORDER OF EVENTS SECTION (SINGLE EXPANDABLE CARD)
-   Single grand wedding card with interactive expandable details drawer
+   7. ORDER OF EVENTS SECTION (CLICK FOR POPUP MODAL)
+   Grand single card; clicking card or button triggers celebratory confetti & opens detail modal
    -------------------------------------------------------------------------- */
 .section-events {
   margin-bottom: 30px;
@@ -989,7 +989,14 @@ button {
   overflow: hidden;
   box-shadow: 0 14px 34px rgba(19, 57, 121, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
   border: 1.5px solid rgba(19, 57, 121, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.event-single-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(19, 57, 121, 0.2);
+  border-color: rgba(212, 175, 55, 0.5);
 }
 
 .event-banner-wrap {
@@ -1006,6 +1013,11 @@ button {
   height: auto;
   display: block;
   filter: drop-shadow(0 6px 16px rgba(19, 57, 121, 0.15));
+  transition: transform 0.4s ease;
+}
+
+.event-single-card:hover .event-banner-artwork {
+  transform: scale(1.02);
 }
 
 /* Overlay for text inside the card image parchment */
@@ -1031,6 +1043,38 @@ button {
   width: 52%;
 }
 
+/* Tap indicator badge */
+.event-card-tap-indicator {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.event-card-tap-indicator .tap-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(19, 57, 121, 0.88);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.event-card-tap-indicator .tap-pill svg {
+  width: 12px;
+  height: 12px;
+  color: #d4af37;
+}
+
 /* Event Titles & Dates */
 .event-custom-title {
   font-family: 'Playfair Display', Georgia, serif;
@@ -1043,14 +1087,6 @@ button {
 
 .title-wedding {
   color: #235fb3;
-}
-
-.title-reception {
-  color: #e11d48;
-}
-
-.title-haldi {
-  color: #65a30d;
 }
 
 .event-custom-date {
@@ -1102,14 +1138,14 @@ button {
   stroke-width: 2.2;
 }
 
-/* Expand Button */
-.btn-event-expand {
+/* Modal Trigger Button */
+.btn-event-modal-trigger {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 12px 18px;
+  padding: 13px 18px;
   background: linear-gradient(135deg, #133979 0%, #1f4f9f 100%);
   color: #ffffff;
   border: none;
@@ -1123,203 +1159,317 @@ button {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-event-expand:hover,
-.btn-event-expand:active {
+.btn-event-modal-trigger:hover,
+.btn-event-modal-trigger:active {
   background: linear-gradient(135deg, #0b224d 0%, #133979 100%);
   box-shadow: 0 6px 18px rgba(19, 57, 121, 0.35);
   transform: translateY(-1px);
 }
 
-.expand-chevron-icon {
-  width: 18px;
-  height: 18px;
-  stroke-width: 2.4;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-event-expand[aria-expanded="true"] .expand-chevron-icon {
-  transform: rotate(180deg);
-}
-
-/* Expandable Drawer */
-.event-details-drawer {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.4s ease;
-  background: #fafbfe;
-  border-top: 1px dashed rgba(19, 57, 121, 0.15);
-}
-
-.event-details-drawer.is-open {
-  max-height: 1400px;
-  opacity: 1;
-}
-
-.drawer-inner-padding {
-  padding: 20px 16px 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Muhurtham Card inside Drawer */
-.drawer-muhurtham-card {
-  background: #ffffff;
-  border: 1.5px solid rgba(212, 175, 55, 0.4);
-  border-radius: 14px;
-  padding: 16px 14px;
-  text-align: center;
-  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.08);
-  position: relative;
-}
-
-.drawer-lotus-icon {
-  font-size: 1.4rem;
-  display: block;
-  margin-bottom: 2px;
-}
-
-.drawer-badge-gold {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #aa820a;
-}
-
-.drawer-muhurtham-time {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  color: var(--color-royal-blue);
-  font-weight: 600;
-  margin: 4px 0 2px;
-}
-
-.drawer-muhurtham-highlight {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #c2410c;
-  margin: 0 0 4px;
-}
-
-.drawer-muhurtham-note {
-  font-size: 0.78rem;
-  color: #64748b;
-  margin: 0;
-  font-style: italic;
-}
-
-/* Itinerary Timeline */
-.drawer-program-timeline,
-.drawer-venue-card {
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 16px 14px;
-  border: 1px solid rgba(19, 57, 121, 0.08);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-}
-
-.drawer-section-heading {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  color: var(--color-royal-blue);
-  margin: 0 0 12px;
-  font-weight: 600;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(19, 57, 121, 0.08);
-}
-
-.drawer-section-heading .sec-hd-icon {
+.btn-sparkle-icon {
   width: 16px;
   height: 16px;
   color: #d4af37;
 }
 
-.program-steps-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.expand-arrow-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.4;
+  transition: transform 0.25s ease;
 }
 
-.program-step {
+.btn-event-modal-trigger:hover .expand-arrow-icon {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   EVENT DETAILS POPUP MODAL DIALOG STYLES
+   ========================================================================== */
+.event-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
   display: flex;
-  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.event-modal-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+body.modal-open {
+  overflow: hidden !important;
+}
+
+.event-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 26, 60, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.event-modal-dialog {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 480px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 22px;
+  border: 1.5px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: translateY(24px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.event-modal-overlay.is-active .event-modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.event-modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(19, 57, 121, 0.15);
+  background: #f0f4fb;
+  color: var(--color-royal-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.event-modal-close-btn:hover {
+  background: #133979;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.event-modal-close-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.event-modal-content {
+  padding: 26px 20px 24px;
+  text-align: center;
+}
+
+.modal-emblem-wrap {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 8px;
+}
+
+.modal-lotus-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.modal-badge-pill {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: #aa820a;
+  margin-bottom: 4px;
+}
+
+.modal-title {
+  font-family: var(--font-heading) !important;
+  font-size: 1.7rem !important;
+  font-weight: 600;
+  color: var(--color-royal-blue) !important;
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.modal-subtitle {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0 0 16px;
+  font-style: italic;
+}
+
+/* Muhurtham Box inside Modal */
+.modal-muhurtham-box {
+  background: linear-gradient(180deg, #fefdf9 0%, #fdf8eb 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  border-radius: 14px;
+  padding: 14px 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1);
+}
+
+.modal-muhurtham-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #aa820a;
+}
+
+.modal-muhurtham-date {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-royal-blue);
+  margin: 4px 0 2px;
+}
+
+.modal-muhurtham-time {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #c2410c;
+  margin-bottom: 4px;
+}
+
+.modal-muhurtham-note {
+  font-size: 0.76rem;
+  color: #64748b;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Timeline inside Modal */
+.modal-timeline-section,
+.modal-venue-section {
+  text-align: left;
+  background: #f8fafc;
+  border: 1px solid rgba(19, 57, 121, 0.08);
+  border-radius: 14px;
+  padding: 14px 14px;
+  margin-bottom: 14px;
+}
+
+.modal-sec-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  color: var(--color-royal-blue);
+  margin: 0 0 10px;
+  font-weight: 600;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(19, 57, 121, 0.08);
+}
+
+.modal-sec-title .sec-icon {
+  width: 15px;
+  height: 15px;
+  color: #d4af37;
+}
+
+.modal-timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-timeline-item {
+  display: flex;
+  gap: 10px;
   align-items: flex-start;
   padding: 8px 10px;
-  border-radius: 10px;
-  background: #f8fafc;
+  border-radius: 8px;
+  background: #ffffff;
   border-left: 3px solid rgba(19, 57, 121, 0.2);
 }
 
-.program-step.step-highlighted {
+.modal-timeline-item.highlight {
   background: #eff6ff;
   border-left: 3px solid #133979;
 }
 
-.step-time-badge {
+.modal-timeline-item .time-badge {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--color-royal-blue);
   background: #ffffff;
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: 3px 6px;
+  border-radius: 5px;
   border: 1px solid rgba(19, 57, 121, 0.15);
   white-space: nowrap;
 }
 
-.step-detail-box {
+.modal-timeline-item .time-desc {
   display: flex;
   flex-direction: column;
 }
 
-.step-title {
-  font-size: 0.84rem;
-  font-weight: 600;
+.modal-timeline-item .time-desc strong {
+  font-size: 0.82rem;
   color: #1e293b;
 }
 
-.step-desc {
-  font-size: 0.75rem;
+.modal-timeline-item .time-desc span {
+  font-size: 0.73rem;
   color: #64748b;
   margin-top: 1px;
 }
 
-/* Venue card inside drawer */
-.venue-place-name {
-  font-family: var(--font-heading);
-  font-size: 0.98rem;
-  color: var(--color-royal-blue);
-  font-weight: 600;
-  margin: 0 0 4px;
+/* Venue Card inside Modal */
+.modal-venue-card {
+  margin-bottom: 10px;
 }
 
-.venue-place-address {
-  font-size: 0.78rem;
+.modal-venue-card .venue-title {
+  font-family: var(--font-heading);
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--color-royal-blue);
+  margin: 0 0 3px;
+}
+
+.modal-venue-card .venue-addr {
+  font-size: 0.76rem;
   color: #475569;
   line-height: 1.35;
-  margin: 0 0 10px;
+  margin: 0 0 2px;
 }
 
-.drawer-action-btn-row {
+.modal-venue-card .venue-landmark {
+  font-size: 0.73rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Modal action buttons */
+.modal-action-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
+  margin-top: 12px;
 }
 
-.btn-drawer-nav,
-.btn-drawer-calendar {
+.btn-modal-action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 9px 12px;
+  padding: 10px 12px;
   font-family: var(--font-sans);
   font-size: 0.78rem;
   font-weight: 600;
@@ -1329,28 +1479,27 @@ button {
   transition: all 0.25s ease;
 }
 
-.btn-drawer-nav {
+.btn-modal-action.btn-maps {
   background: #133979;
   color: #ffffff;
   border: none;
 }
 
-.btn-drawer-nav:hover {
+.btn-modal-action.btn-maps:hover {
   background: #0b224d;
 }
 
-.btn-drawer-calendar {
+.btn-modal-action.btn-cal {
   background: #ffffff;
   color: #133979;
   border: 1.5px solid #133979;
 }
 
-.btn-drawer-calendar:hover {
+.btn-modal-action.btn-cal:hover {
   background: #f0f4fb;
 }
 
-.btn-drawer-nav svg,
-.btn-drawer-calendar svg {
+.btn-modal-action svg {
   width: 14px;
   height: 14px;
 }

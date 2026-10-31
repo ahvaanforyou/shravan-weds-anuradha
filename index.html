@@ -4,7 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Shravan Kumar &amp; Hima Bindu | Wedding Celebration</title>
-  <meta name="description" content="Wedding celebration invitation of Shravan Kumar Koramaina and Hima Bindu with the divine blessings of Radha Krishna.">
+  <meta name="description" content="Together with their families, Anuradha &amp; Mohan Koramaina and Kalavathi &amp; Sesha Chary cordially invite you to celebrate the wedding ceremony of Shravan Kumar &amp; Hima Bindu on Wednesday, 04 November 2026 at Singi Reddy Shiva Reddy Gardens, Karmanghat. Tap to view the invitation and RSVP.">
+
+  <!-- OpenGraph / Facebook / WhatsApp Social Share Meta -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Shravan weds Hima Bindu" />
+  <meta property="og:url" content="https://shravan-weds-anuradha.vercel.app" />
+  <meta property="og:title" content="Shravan weds Hima Bindu — Wedding Invitation 💍" />
+  <meta
+    property="og:description"
+    content="Together with their families, Anuradha &amp; Mohan Koramaina and Kalavathi &amp; Sesha Chary cordially invite you to celebrate the wedding ceremony of Shravan Kumar &amp; Hima Bindu on Wednesday, 04 November 2026 at Singi Reddy Shiva Reddy Gardens, Karmanghat. Tap to view the invitation and RSVP."
+  />
+  <meta property="og:image" content="https://shravan-weds-anuradha.vercel.app/assets/og-wedding-banner.jpg?v=2" />
+  <meta property="og:image:secure_url" content="https://shravan-weds-anuradha.vercel.app/assets/og-wedding-banner.jpg?v=2" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Shravan Kumar &amp; Hima Bindu Wedding Invitation" />
+  <link rel="image_src" href="https://shravan-weds-anuradha.vercel.app/assets/og-wedding-banner.jpg?v=2" />
+
+  <!-- Twitter Card Meta -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Shravan weds Hima Bindu — Wedding Invitation 💍" />
+  <meta
+    name="twitter:description"
+    content="Together with their families, Anuradha &amp; Mohan Koramaina and Kalavathi &amp; Sesha Chary cordially invite you to celebrate the wedding ceremony of Shravan Kumar &amp; Hima Bindu on Wednesday, 04 November 2026 at Singi Reddy Shiva Reddy Gardens, Karmanghat. Tap to view the invitation and RSVP."
+  />
+  <meta name="twitter:image" content="https://shravan-weds-anuradha.vercel.app/assets/og-wedding-banner.jpg?v=2" />
 
   <!-- Google Fonts: Luxury Serif, Romantic Script & Classic Lettering -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -349,8 +375,8 @@
     </section>
 
     <!-- ============================================== -->
-    <!-- 7. ORDER OF EVENTS SECTION (SINGLE EXPANDABLE CARD) -->
-    <!-- Single grand wedding card with interactive expandable details drawer -->
+    <!-- 7. ORDER OF EVENTS SECTION (CLICK FOR POPUP MODAL) -->
+    <!-- Grand single card; clicking card or button triggers celebratory confetti & opens detail modal -->
     <!-- ============================================== -->
     <section class="section-events anim-blur" id="events">
       <div class="section-title-wrap">
@@ -361,8 +387,8 @@
 
       <div class="events-single-container" id="eventsStack">
         
-        <!-- Single Grand Wedding Card -->
-        <div class="event-single-card" id="event-single-card">
+        <!-- Single Grand Wedding Card (Clickable to open modal with Confetti) -->
+        <div class="event-single-card" id="weddingEventCard" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open Wedding Ceremony Details">
           
           <!-- Banner Artwork with Royal Parchment Overlay -->
           <div class="event-banner-wrap">
@@ -374,6 +400,9 @@
             <div class="event-card-inner-overlay overlay-right">
               <h3 class="event-custom-title title-wedding">Wedding</h3>
               <p class="event-custom-date date-wedding">04-11-2026</p>
+            </div>
+            <div class="event-card-tap-indicator">
+              <span class="tap-pill"><i data-lucide="sparkles"></i> Tap for Details</span>
             </div>
           </div>
 
@@ -388,105 +417,128 @@
               </span>
             </div>
 
-            <!-- Interactive Expand / Collapse Trigger Button -->
+            <!-- Modal Trigger Button -->
             <button 
-              id="btnToggleEventDetails" 
-              class="btn-event-expand" 
-              aria-expanded="false" 
-              aria-controls="eventDetailsDrawer"
+              id="btnOpenEventModal" 
+              class="btn-event-modal-trigger" 
+              type="button" 
+              aria-label="View Event Details and Directions"
             >
+              <i data-lucide="sparkles" class="btn-sparkle-icon"></i>
               <span class="expand-btn-text">View Event Details &amp; Directions</span>
-              <i data-lucide="chevron-down" class="expand-chevron-icon"></i>
+              <i data-lucide="arrow-right" class="expand-arrow-icon"></i>
             </button>
-          </div>
-
-          <!-- Expandable Details Drawer -->
-          <div id="eventDetailsDrawer" class="event-details-drawer">
-            <div class="drawer-inner-padding">
-              
-              <!-- Auspicious Muhurtham Banner -->
-              <div class="drawer-muhurtham-card">
-                <span class="drawer-lotus-icon">🪷</span>
-                <span class="drawer-badge-gold">✦ SACRED SUMUHURTHAM ✦</span>
-                <h4 class="drawer-muhurtham-time">Wednesday, 04th November 2026</h4>
-                <p class="drawer-muhurtham-highlight">Lagna Muhurtham at 07:30 PM</p>
-                <p class="drawer-muhurtham-note">In the divine presence of family, relatives, and well-wishers</p>
-              </div>
-
-              <!-- Detailed Event Program Timeline -->
-              <div class="drawer-program-timeline">
-                <h5 class="drawer-section-heading">
-                  <i data-lucide="sparkles" class="sec-hd-icon"></i> Ceremony Itinerary
-                </h5>
-                <div class="program-steps-list">
-                  <div class="program-step">
-                    <div class="step-time-badge">06:30 PM</div>
-                    <div class="step-detail-box">
-                      <span class="step-title">Baraat &amp; Swagatham</span>
-                      <span class="step-desc">Grand arrival of the groom and joyful welcoming by bride's family</span>
-                    </div>
-                  </div>
-                  <div class="program-step step-highlighted">
-                    <div class="step-time-badge">07:30 PM</div>
-                    <div class="step-detail-box">
-                      <span class="step-title">Lagna Muhurtham &amp; Jeelakarra Bellam</span>
-                      <span class="step-desc">The sacred auspicious moment of divine union and timeless vows</span>
-                    </div>
-                  </div>
-                  <div class="program-step">
-                    <div class="step-time-badge">08:30 PM</div>
-                    <div class="step-detail-box">
-                      <span class="step-title">Mangalya Dharana &amp; Talambralu</span>
-                      <span class="step-desc">The sacred knot of love followed by showering of auspicious pearls</span>
-                    </div>
-                  </div>
-                  <div class="program-step">
-                    <div class="step-time-badge">09:00 PM</div>
-                    <div class="step-detail-box">
-                      <span class="step-title">Aseervachanam &amp; Grand Feast</span>
-                      <span class="step-desc">Blessings from elders and a traditional lavish celebratory dinner</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Venue Details & Direct Navigation Links Inside Card -->
-              <div class="drawer-venue-card">
-                <h5 class="drawer-section-heading">
-                  <i data-lucide="map-pin" class="sec-hd-icon"></i> Venue &amp; Directions
-                </h5>
-                <div class="venue-brief">
-                  <h6 class="venue-place-name">Singi Reddy Shiva Reddy Gardens</h6>
-                  <p class="venue-place-address">Padma Nagar Colony, Karmanghat, Telangana (Beside Karmanghat Hanuman Temple) - 500097</p>
-                </div>
-                <div class="drawer-action-btn-row">
-                  <a 
-                    href="https://www.google.com/maps/search/?api=1&query=Singi+Reddy+Shiva+Reddy+Gardens+Karmanghat+Telangana" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    class="btn-drawer-nav"
-                  >
-                    <i data-lucide="navigation"></i>
-                    <span>Open in Maps</span>
-                  </a>
-                  <button 
-                    type="button" 
-                    class="btn-drawer-calendar" 
-                    onclick="addToGoogleCalendar()"
-                  >
-                    <i data-lucide="calendar-plus"></i>
-                    <span>Add to Calendar</span>
-                  </button>
-                </div>
-              </div>
-
-            </div>
           </div>
 
         </div>
 
       </div>
     </section>
+
+    <!-- ============================================== -->
+    <!-- EVENT DETAILS POPUP MODAL DIALOG WITH CONFETTI -->
+    <!-- ============================================== -->
+    <div id="eventDetailsModal" class="event-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="event-modal-backdrop" id="modalBackdrop"></div>
+      <div class="event-modal-dialog">
+        
+        <!-- Modal Close Button -->
+        <button id="btnCloseEventModal" class="event-modal-close-btn" aria-label="Close Event Details">
+          <i data-lucide="x"></i>
+        </button>
+
+        <div class="event-modal-content">
+          
+          <!-- Top Auspicious Lotus Emblem -->
+          <div class="modal-emblem-wrap">
+            <img src="assets/lotus-gold.webp" alt="Sacred Lotus" class="modal-lotus-img" />
+          </div>
+
+          <span class="modal-badge-pill">✦ SHUBH VIVAH ✦</span>
+          <h3 class="modal-title">Wedding Ceremony</h3>
+          <p class="modal-subtitle">With the divine blessings of Sri Radha Krishna</p>
+
+          <!-- Auspicious Muhurtham Highlight -->
+          <div class="modal-muhurtham-box">
+            <div class="modal-muhurtham-tag">SACRED SUMUHURTHAM</div>
+            <div class="modal-muhurtham-date">Wednesday, 04th November 2026</div>
+            <div class="modal-muhurtham-time">Lagna Muhurtham at 07:30 PM</div>
+            <p class="modal-muhurtham-note">"May this sacred union be blessed with eternal happiness, devotion, and harmony."</p>
+          </div>
+
+          <!-- Ceremony Program Timeline -->
+          <div class="modal-timeline-section">
+            <h4 class="modal-sec-title">
+              <i data-lucide="calendar" class="sec-icon"></i> Ceremony Program
+            </h4>
+            <div class="modal-timeline-list">
+              <div class="modal-timeline-item">
+                <span class="time-badge">06:30 PM</span>
+                <div class="time-desc">
+                  <strong>Baraat &amp; Swagatham</strong>
+                  <span>Arrival of the Groom &amp; traditional welcoming by Bride's family</span>
+                </div>
+              </div>
+              <div class="modal-timeline-item highlight">
+                <span class="time-badge">07:30 PM</span>
+                <div class="time-desc">
+                  <strong>Lagna Muhurtham &amp; Jeelakarra Bellam</strong>
+                  <span>The sacred auspicious moment of divine union and timeless vows</span>
+                </div>
+              </div>
+              <div class="modal-timeline-item">
+                <span class="time-badge">08:30 PM</span>
+                <div class="time-desc">
+                  <strong>Mangalya Dharana &amp; Talambralu</strong>
+                  <span>Tying the holy knot &amp; joyous shower of sacred pearls</span>
+                </div>
+              </div>
+              <div class="modal-timeline-item">
+                <span class="time-badge">09:00 PM</span>
+                <div class="time-desc">
+                  <strong>Aseervachanam &amp; Grand Feast</strong>
+                  <span>Blessings from elders &amp; traditional celebratory feast</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Venue & Directions Section -->
+          <div class="modal-venue-section">
+            <h4 class="modal-sec-title">
+              <i data-lucide="map-pin" class="sec-icon"></i> Venue &amp; Directions
+            </h4>
+            <div class="modal-venue-card">
+              <h5 class="venue-title">Singi Reddy Shiva Reddy Gardens</h5>
+              <p class="venue-addr">Padma Nagar Colony, Karmanghat, Telangana - 500097</p>
+              <p class="venue-landmark"><em>(Beside Karmanghat Hanuman Temple)</em></p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="modal-action-buttons">
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=Singi+Reddy+Shiva+Reddy+Gardens+Karmanghat+Telangana" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-modal-action btn-maps"
+              >
+                <i data-lucide="navigation"></i>
+                <span>Open in Google Maps</span>
+              </a>
+              <button 
+                type="button" 
+                class="btn-modal-action btn-cal" 
+                onclick="addToGoogleCalendar()"
+              >
+                <i data-lucide="calendar-plus"></i>
+                <span>Add to Calendar</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
     <!-- ============================================== -->
     <!-- 8. VENUE & LOCATION MAP SECTION (BEFORE RSVP) -->
