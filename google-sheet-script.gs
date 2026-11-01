@@ -1,6 +1,6 @@
 /**
  * =======================================================================
- * 💍 SHRAVAN & HIMA BINDU WEDDING — GOOGLE SHEETS RSVP WEBHOOK & DASHBOARD
+ * 💍 SHRAVAN & HIMA BINDU RECEPTION — GOOGLE SHEETS RSVP WEBHOOK & DASHBOARD
  * =======================================================================
  * 
  * FEATURES:
@@ -17,7 +17,7 @@
  *    - Col C: Phone / WhatsApp Number
  *    - Col D: Total Guests
  *    - Col E: Attendance Status (Attending / Declined with badge styling)
- *    - Col F: Events Attending (Wedding Reception)
+ *    - Col F: Events Attending (Reception)
  *    - Col G: Warm Wishes / Blessings
  * 
  * 3. SMART IN-PLACE ROW EDITING:
@@ -152,7 +152,7 @@ function setupSheet() {
   // ROW 1: MASTER TITLE BANNER (Royal Navy #133979 & Warm Gold #D4AF37)
   // =========================================================================
   sheet.getRange("A1:G1").merge()
-    .setValue("✨ SHRAVAN & HIMA BINDU — WEDDING RECEPTION RSVP DASHBOARD ✨")
+    .setValue("✨ SHRAVAN & HIMA BINDU — RECEPTION RSVP DASHBOARD ✨")
     .setBackground("#133979") // Royal Navy Blue
     .setFontColor("#FFE58F")  // Bright Gold
     .setFontFamily("Georgia")
@@ -249,7 +249,7 @@ function setupSheet() {
     "+91 98765 43210",
     2,
     "Attending",
-    "Wedding Reception",
+    "Reception",
     "Heartiest congratulations to Shravan & Hima Bindu! Wishing you both a lifetime of bliss."
   ];
 
@@ -344,7 +344,7 @@ function doPost(e) {
       }
     }
 
-    var events = (attending === "Attending") ? (data.events || "Wedding Reception") : "None";
+    var events = (attending === "Attending") ? (data.events || "Reception") : "None";
     var message = (data.message || data.note || data.warm_wishes || "-").toString().trim();
 
     // Check for existing RSVP (Smart In-Place Row Edit)
@@ -395,6 +395,6 @@ function doPost(e) {
  * Health check endpoint for testing in browser
  */
 function doGet(e) {
-  return ContentService.createTextOutput("💍 Shravan & Hima Bindu Wedding RSVP Webhook is ACTIVE and connected! Ready to receive RSVPs.")
+  return ContentService.createTextOutput("💍 Shravan & Hima Bindu Reception RSVP Webhook is ACTIVE and connected! Ready to receive RSVPs.")
     .setMimeType(ContentService.MimeType.TEXT);
 }

@@ -1,4 +1,4 @@
-# 💍 Shravan & Hima Bindu Wedding — Google Sheets Dashboard & RSVP Setup Guide
+# 💍 Shravan & Hima Bindu Reception — Google Sheets Dashboard & RSVP Setup Guide
 
 This guide explains how to set up your Google Sheet with the **Royal Executive Dashboard**, **live Reception totals**, and **Smart In-Place RSVP Row Updates** (just like the Kalyan Wedding setup).
 
@@ -17,7 +17,7 @@ This guide explains how to set up your Google Sheet with the **Royal Executive D
    - `Phone / WhatsApp Number`
    - `Total Guests`
    - `Attendance Status` *(Attending / Declined with badge styling)*
-   - `Events Attending` *(Wedding Reception)*
+   - `Events Attending` *(Reception)*
    - `Warm Wishes / Blessings`
 3. **Smart In-Place Row Editing**:
    - When a guest edits their RSVP on the website, it locates their existing row by phone or name and **updates that exact row** instead of creating a duplicate.
@@ -28,7 +28,7 @@ This guide explains how to set up your Google Sheet with the **Royal Executive D
 ---
 
 ### Step 1: Open Google Sheets Apps Script
-1. Open a new or existing **Google Sheet** (e.g. named `Shravan & Hima Bindu Wedding RSVPs`).
+1. Open a new or existing **Google Sheet** (e.g. named `Shravan & Hima Bindu Reception RSVPs`).
 2. Rename the active sheet tab at the bottom to: **`RSVP Responses`**.
 3. In the top menu, click **Extensions** > **Apps Script**.
 4. Select all existing text in the editor (`Code.gs`) and delete it.

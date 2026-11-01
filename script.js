@@ -202,7 +202,7 @@ function initScrollAnimations() {
    3. LIVE WEDDING COUNTDOWN TIMER (01 NOVEMBER 2026)
    ========================================================================== */
 function initWeddingCountdown() {
-  const targetDate = new Date('2026-11-04T19:00:00+05:30').getTime();
+  const targetDate = new Date('2026-11-04T19:30:00+05:30').getTime();
 
   const elDays = document.getElementById('cd-days');
   const elHours = document.getElementById('cd-hours');
@@ -679,11 +679,11 @@ function initEventDetailsModal() {
 }
 
 function addToGoogleCalendar() {
-  const title = encodeURIComponent("Wedding Reception: Shravan Kumar & Hima Bindu");
-  const details = encodeURIComponent("Wedding Reception of Shravan Kumar & Hima Bindu with the divine blessings of Radha Krishna.");
+  const title = encodeURIComponent("Reception: Shravan Kumar & Hima Bindu");
+  const details = encodeURIComponent("Reception of Shravan Kumar & Hima Bindu with the divine blessings of Radha Krishna.");
   const location = encodeURIComponent("Yalala Balreddy Function Hall, Yelmati Nagar, Balapur, Hyderabad, Telangana - 500005");
-  // 04 Nov 2026 19:00 IST to 23:00 IST -> 13:30 UTC to 17:30 UTC
-  const dates = "20261104T133000Z/20261104T173000Z";
+  // 04 Nov 2026 19:30 IST to 23:30 IST -> 14:00 UTC to 18:00 UTC
+  const dates = "20261104T140000Z/20261104T180000Z";
   const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
   window.open(gCalUrl, '_blank');
 }
@@ -798,7 +798,7 @@ function handleRsvpSubmit(e) {
     attending: attending === 'yes' ? 'Attending' : 'Declined',
     guests: attending === 'yes' ? guests : '0',
     guest_count: attending === 'yes' ? (parseInt(guests, 10) || 1) : 0,
-    events: attending === 'yes' ? (eventsChecked || 'Wedding Reception') : 'None',
+    events: attending === 'yes' ? (eventsChecked || 'Reception') : 'None',
     message: message || '-',
     timestamp: new Date().toISOString()
   };
@@ -818,7 +818,7 @@ function handleRsvpSubmit(e) {
   if (nameDisplay) nameDisplay.textContent = name;
   if (summaryDetails) {
     summaryDetails.innerHTML = attending === 'yes'
-      ? `🎉 Attending with <strong>${guests}</strong> guest(s) for <strong>${eventsChecked || 'Wedding Reception'}</strong>`
+      ? `🎉 Attending with <strong>${guests}</strong> guest(s) for <strong>${eventsChecked || 'Reception'}</strong>`
       : `🕊️ Heartfelt blessings received with warm gratitude from afar`;
   }
 
@@ -861,16 +861,16 @@ function shareOnWhatsApp() {
   const groomParents = 'Anuradha & Mohan Koramaina';
   const brideParents = 'Kalavathi & Sesha Chary';
   const date = 'Wednesday, 04 November 2026';
-  const reception = '07:00 PM Onwards';
+  const reception = '07:30 PM Onwards';
   const venue = 'Yalala Balreddy Function Hall, Yelmati Nagar, Balapur, Hyderabad, Telangana - 500005';
   const link = 'https://shravan-weds-anuradha.vercel.app';
 
   const msg = `॥ श्री राधाकृष्णाभ्यां नमः ॥\n\n` +
-    `🌸 *WEDDING RECEPTION INVITATION* 🌸\n\n` +
+    `🌸 *RECEPTION INVITATION* 🌸\n\n` +
     `Together with their families,\n` +
     `*${groomParents}*\n` +
     `& *${brideParents}*\n\n` +
-    `Cordially invite your gracious presence and blessings on the wedding reception of their beloved children:\n\n` +
+    `Cordially invite your gracious presence and blessings on the reception of their beloved children:\n\n` +
     `✨ *${groom}* ✨\n` +
     `_weds_\n` +
     `✨ *${bride}* ✨\n\n` +
@@ -887,7 +887,7 @@ function shareOnWhatsApp() {
 
 function copyInviteLink() {
   navigator.clipboard.writeText(window.location.href).then(() => {
-    showToast('🔗 Wedding invite link copied!');
+    showToast('🔗 Reception invite link copied!');
   }).catch(() => {
     showToast('Link copied!');
   });
