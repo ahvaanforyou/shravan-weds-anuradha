@@ -681,7 +681,7 @@ function initEventDetailsModal() {
 function addToGoogleCalendar() {
   const title = encodeURIComponent("Reception: Shravan Kumar & Hima Bindu");
   const details = encodeURIComponent("Reception of Shravan Kumar & Hima Bindu with the divine blessings of Radha Krishna.");
-  const location = encodeURIComponent("Yalala Balreddy Function Hall, Yelmati Nagar, Balapur, Hyderabad, Telangana - 500005");
+  const location = encodeURIComponent("Singireddy Shiva Reddy Gardens, Padma Nagar Colony, Kharmanghat, Hyderabad, Telangana - 500097");
   // 04 Nov 2026 19:30 IST to 23:30 IST -> 14:00 UTC to 18:00 UTC
   const dates = "20261104T140000Z/20261104T180000Z";
   const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
@@ -862,7 +862,7 @@ function shareOnWhatsApp() {
   const brideParents = 'Kalavathi & Sesha Chary';
   const date = 'Wednesday, 04 November 2026';
   const reception = '07:30 PM Onwards';
-  const venue = 'Yalala Balreddy Function Hall, Yelmati Nagar, Balapur, Hyderabad, Telangana - 500005';
+  const venue = 'Singireddy Shiva Reddy Gardens, Kharmanghat, Hyderabad (Beside Karmanghat Hanuman Temple) - 500097';
   const link = 'https://shravan-weds-anuradha.vercel.app';
 
   const msg = `॥ श्री राधाकृष्णाभ्यां नमः ॥\n\n` +
